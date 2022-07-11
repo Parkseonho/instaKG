@@ -1,5 +1,6 @@
 package com.mysite.sbbb.article.controller;
 
+
 import com.mysite.sbbb.article.dao.ArticleRepository;
 import com.mysite.sbbb.article.domain.Article;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,21 @@ public class ArticleController {
         return article.orElse(null);
         // .orElse : Optional을 통해 가져온 값이 null일때 해당값을 반환하는 메소드
         // 사용방법 : detail?id=번호
+    }
+
+    @RequestMapping("/doModify")
+    @ResponseBody
+    public Article showModify(@RequestParam long id, String title, String body) {
+        Article article = articleRepository.findById(id).get();
+        if(title != null){
+            article.setTitle(title);
+        }
+        if(body != null){
+            article.setBody(body);
+        }
+
+        articleRepository.save(article);
+        // save() : 단순히 새 엔터티를 추가하는 메소드가 아닌 업데이트를 위한 용도로도 사용할 수 있다.
+        return article;
     }
 }
