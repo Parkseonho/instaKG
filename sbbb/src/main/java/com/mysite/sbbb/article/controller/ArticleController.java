@@ -39,16 +39,34 @@ public class ArticleController {
     @RequestMapping("/doModify")
     @ResponseBody
     public Article showModify(@RequestParam long id, String title, String body) {
-        Article article = articleRepository.findById(id).get();
+        Article article = articleRepository.findById(id).get();//조건에 맞는 데이터 가져오기
         if(title != null){
-            article.setTitle(title);
+            article.setTitle(title);//불러온 데이터 수정
         }
         if(body != null){
-            article.setBody(body);
+            article.setBody(body);//불러온 데이터 수정
         }
 
-        articleRepository.save(article);
+        articleRepository.save(article);//수정된 데이터 DB에 저장
         // save() : 단순히 새 엔터티를 추가하는 메소드가 아닌 업데이트를 위한 용도로도 사용할 수 있다.
         return article;
+    }
+
+    @RequestMapping("/doDelete")
+    @ResponseBody
+    public String doArticleDelete(long id) {
+        articleRepository.deleteById(id);
+        return "%d번 게시물이 삭제되었습니다.".formatted(id);
+        /*
+
+        GDScript에서 텍스트를 형식화하는 방법
+        [ 예시 ]
+        var format_string = "We're waiting for {str}"
+
+        var actual_string = format_string.format({"str": "Godot"})
+
+        print(actual_string)
+        # Output: "We're waiting for Godot"
+        */
     }
 }
