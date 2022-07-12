@@ -8,4 +8,6 @@ import java.util.List;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findByTitle(String title);
+
+    boolean existsByTitle(String title);
 }

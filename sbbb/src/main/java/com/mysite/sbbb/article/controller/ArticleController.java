@@ -29,7 +29,7 @@ public class ArticleController {
     @RequestMapping("/detail")
     @ResponseBody
     public Article showArticleDetail(@RequestParam long id, String name) {
-        // RequestParam : HTTP 요청 파라미터를 받기 위해 사용
+        // RequestParam : HTTP 요청 파라미터를 받기 위해 사용(있어도 그만 없어도 그만)
         Optional<Article> article = articleRepository.findById(id);
         // Optional<T> : 복잡한 조건문 없이도 null 값으로 인해 발생하는 예외 처리할 수 있음
         return article.orElse(null);
@@ -38,7 +38,15 @@ public class ArticleController {
     }
     @RequestMapping("/findByTitle")
     @ResponseBody
-    public List<Article> showArticleTitle(@RequestParam String title) {
+    public Object showArticleTitle(@RequestParam String title) { //String과 List를 사용하니 Object 사용
+        if (!articleRepository.existsByTitle(title)) {
+            List<Article> article = articleRepository.findByTitle(title);
+            if(article != null){ // 게시물에 내용이 없어도 "[]"는 존재함
+                // 위의 if문을 통해서 title이 없는것중 null이 아닌것을 찾는거임
+                return "없는 게시물입니다.";
+            }
+            return article;
+        }
         List<Article> article = articleRepository.findByTitle(title);
         // 쿼리를 조합할 수 있음(findByTitle을 만든 후 메서드를 생성하면됨)
         return article;
