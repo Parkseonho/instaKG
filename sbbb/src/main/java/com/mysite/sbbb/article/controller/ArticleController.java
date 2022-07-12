@@ -28,7 +28,7 @@ public class ArticleController {
     @RequestMapping("/detail")
     @ResponseBody
     public Article showArticleDetail(@RequestParam long id, String name) {
-        //RequestParam : HTTP 요청 파라미터를 받기 위해 사용
+        // RequestParam : HTTP 요청 파라미터를 받기 위해 사용
         Optional<Article> article = articleRepository.findById(id);
         // Optional<T> : 복잡한 조건문 없이도 null 값으로 인해 발생하는 예외 처리할 수 있음
         return article.orElse(null);
@@ -55,8 +55,14 @@ public class ArticleController {
     @RequestMapping("/doDelete")
     @ResponseBody
     public String doArticleDelete(long id) {
+        if (!articleRepository.existsById(id)) {
+            return "이미 삭제되었거나 없는 게시물입니다.";
+        }
+        // existsById : 존재하는지 안 하는지 확인하기 위해 boolean을 확인하는 existsById
+        // 만약 존재하지 않으면 이미 삭제되었다고 출력
         articleRepository.deleteById(id);
-        return "%d번 게시물이 삭제되었습니다.".formatted(id);
+            return "%d번 게시물이 삭제되었습니다.".formatted(id);
+
         /*
 
         GDScript에서 텍스트를 형식화하는 방법
