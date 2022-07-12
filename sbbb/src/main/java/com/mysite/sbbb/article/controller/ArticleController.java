@@ -36,6 +36,13 @@ public class ArticleController {
         // .orElse : Optional을 통해 가져온 값이 null일때 해당값을 반환하는 메소드
         // 사용방법 : detail?id=번호
     }
+    @RequestMapping("/findByTitle")
+    @ResponseBody
+    public List<Article> showArticleTitle(@RequestParam String title) {
+        List<Article> article = articleRepository.findByTitle(title);
+        // 쿼리를 조합할 수 있음(findByTitle을 만든 후 메서드를 생성하면됨)
+        return article;
+    }
 
     @RequestMapping("/doModify")
     @ResponseBody
