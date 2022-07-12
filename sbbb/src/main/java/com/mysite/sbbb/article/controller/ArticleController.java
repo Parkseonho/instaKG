@@ -68,6 +68,31 @@ public class ArticleController {
         // save() : 단순히 새 엔터티를 추가하는 메소드가 아닌 업데이트를 위한 용도로도 사용할 수 있다.
         return article;
     }
+    @RequestMapping("/doWrite")
+    @ResponseBody
+    public Object showModify(@RequestParam String title, String body) {
+        if(title == null || title.trim().length() == 0){
+            return "title을 입력하여주세요";
+        }
+        if(body == null|| body.trim().length() == 0){
+            return "body를 입력하여주세요";
+        }
+        title = title.trim();
+        body = body.trim();
+
+        Article article = new Article();
+
+        // id는 자동으로 설정
+        article.setRegDate(LocalDateTime.now());
+        article.setUpdateDate(LocalDateTime.now());
+        article.setTitle(title);
+        article.setBody(body);
+
+        articleRepository.save(article);//수정된 데이터 DB에 저장
+        // save() : 단순히 새 엔터티를 추가하는 메소드가 아닌 업데이트를 위한 용도로도 사용할 수 있다.
+
+        return "게시물 생성 완료";
+    }
 
     @RequestMapping("/doDelete")
     @ResponseBody
@@ -93,3 +118,14 @@ public class ArticleController {
         */
     }
 }
+
+/*
+[crud] - 게시판 기본 구성
+create
+
+read
+
+update
+
+delete
+ */
