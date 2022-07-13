@@ -1,7 +1,7 @@
-package com.mysite.sbbb.question.controller;
+package com.mysite.sbbb.answer.controller;
 
-import com.mysite.sbbb.question.dao.QuestionRepository;
-import com.mysite.sbbb.question.domain.Question;
+import com.mysite.sbbb.answer.dao.AnswerRepository;
+import com.mysite.sbbb.answer.domain.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +14,12 @@ import java.util.List;
 @RequestMapping("/answer")
 public class AnswerController {
     @Autowired
-    private QuestionRepository questionRepository;
+    private AnswerRepository answerRepository;
 
     @RequestMapping("/list")
     @ResponseBody
-    public List<Question> showQuestionList() {
-        return questionRepository.findAll();
+    public List<Answer> showAnswerList() {
+        return answerRepository.findAll();
     }
 
 }
