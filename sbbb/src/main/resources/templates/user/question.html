@@ -5,9 +5,38 @@
     <title>Title</title>
 </head>
 <body>
-
-   <div th:each="question : ${questions}">
-       [[${question.id}]]  [[${question.subject}]]  [[${question.content}]]
+<h2 class="title"> Question </h2>
+<div class="question">
+   <div class="questionClass" th:each="question : ${questions}">
+      | [[${question.id}]] | [[${question.subject}]] | [[${question.content}]] |
    </div>
+</div>
 </body>
+<style>
+div{
+font-family: 'Nanum Pen Script', cursive;
+}
+.title{
+display:flex;
+justify-content:center;
+align-items:center;
+height : 50px;
+width : 50%;
+border : 1px solid black;
+margin:0px;
+}
+.questionClass{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background-color : #20B2AA;
+color : #FFF5EE;
+font-size : 20px;
+font-weight : bold;
+border : 1px solid black;
+height : 50px;
+width : 50%;
+}
+</style>
 </html>

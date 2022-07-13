@@ -1,8 +1,8 @@
-package com.mysite.sbbb.article.controller;
+package com.mysite.sbbb.answer.domain.article.controller;
 
 
-import com.mysite.sbbb.article.dao.ArticleRepository;
-import com.mysite.sbbb.article.domain.Article;
+import com.mysite.sbbb.answer.domain.article.dao.ArticleRepository;
+import com.mysite.sbbb.answer.domain.article.domain.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
