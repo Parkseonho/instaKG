@@ -11,4 +11,11 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     boolean existsByTitle(String title);
 
+    boolean existsByBody(String body);
+
+    List<Article> findByBody(String body);
+
+    boolean existsByTitleAndBody(String title, String body);
+
+    List<Article> findByTitleAndBody(String title, String body);
 }

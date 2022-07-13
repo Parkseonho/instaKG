@@ -20,11 +20,7 @@ public class ArticleController {
     @Autowired
     private ArticleRepository articleRepository;
 
-    @RequestMapping("/list")
-    @ResponseBody
-    public List<Article> showArticleList() {
-        return articleRepository.findAll();
-    }
+
 
     @RequestMapping("/detail")
     @ResponseBody
@@ -52,6 +48,32 @@ public class ArticleController {
         return article;
     }
 
+    @RequestMapping("/list")
+    @ResponseBody
+    public List<Article> showArticle(String title, String body) {
+        if (title != null && body == null) { //title존재
+          if(!articleRepository.existsByTitle(title)){ // title에 입력한 값과 게시물의 제목이 일치하지 않을때
+              System.out.println("제목과 일치하는 게시물이 존재하지 않습니다."); // 화면이 아닌 intellij 실행창에 뜬다.
+              return null;
+          }
+          return articleRepository.findByTitle(title); // title에 입력한 값과 게시물의 제목이 일치할 떄
+        }else if (title == null && body != null) {
+           if(!articleRepository.existsByBody(body)){
+                System.out.println("내용과 일치하는 게시물이 존재하지 않습니다.");
+                return null;
+            }
+            return articleRepository.findByBody(body);
+        } else if (title != null && body != null) {
+            if(!articleRepository.existsByTitleAndBody(title, body)){
+                System.out.println("제목,내용과 일치하는 게시물이 존재하지 않습니다.");
+                return null;
+            }
+            return articleRepository.findByTitleAndBody(title, body);
+        }
+        return articleRepository.findAll(); //아무것도 입력안하면 모든 게시물 출력
+    }
+
+
     @RequestMapping("/doModify")
     @ResponseBody
     public Article showModify(@RequestParam long id, String title, String body) {
@@ -70,7 +92,7 @@ public class ArticleController {
     }
     @RequestMapping("/doWrite")
     @ResponseBody
-    public Object showModify(@RequestParam String title, String body) {
+    public Object showWrite(String title, String body) {
         if(title == null || title.trim().length() == 0){
             return "title을 입력하여주세요";
         }
@@ -91,7 +113,7 @@ public class ArticleController {
         articleRepository.save(article);//수정된 데이터 DB에 저장
         // save() : 단순히 새 엔터티를 추가하는 메소드가 아닌 업데이트를 위한 용도로도 사용할 수 있다.
 
-        return "게시물 생성 완료";
+        return "%d번 게시물 생성 완료".formatted(article.getId());
     }
 
     @RequestMapping("/doDelete")
