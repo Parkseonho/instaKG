@@ -7,15 +7,17 @@
 <body>
 <h2 class="title"> Question </h2>
 <div class="question">
-   <div class="questionClass" th:each="question : ${questions}">
-      | [[${question.id}]] | [[${question.subject}]] | [[${question.content}]] |
-   </div>
+    <div class="questionClass" th:each="question : ${questions}">
+        | [[${question.id}]] | <a th:href="@{|/question/detail/${question.id}|}">[[${question.subject}]] </a>| [[${question.createDate}]] |
+    </div>
 </div>
 </body>
 <style>
 div{
-font-family: 'Nanum Pen Script', cursive;
+ font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 }
+
 .title{
 display:flex;
 justify-content:center;
@@ -25,9 +27,10 @@ width : 50%;
 border : 1px solid black;
 margin:0px;
 }
+
 .questionClass{
 display:flex;
-flex-direction:column;
+flex-direction:row;
 justify-content:center;
 align-items:center;
 background-color : #20B2AA;
@@ -38,5 +41,6 @@ border : 1px solid black;
 height : 50px;
 width : 50%;
 }
+
 </style>
 </html>

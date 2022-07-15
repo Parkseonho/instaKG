@@ -1,4 +1,4 @@
-package com.mysite.sbbb.answer.domain.article.domain;
+package com.mysite.sbbb.article.domain;
 
 import lombok.Getter;
 import lombok.Setter;
