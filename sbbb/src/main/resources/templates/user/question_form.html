@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>CreateFrom</title>
+</head>
+<body>
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<link rel="stylesheet" href="text/css" th:href="@{/style.css}">
+<div class="container">
+    <h5 class="my-3 border-bottom pb-2">질문 등록</h5>
+    <form th:action="@{/question/create}" method="post">
+        <div class="mb-3">
+            <label class="form-label" for="subject">제목</label>
+            <input type="text" name="subject" class="form-control"></input>
+        </div>
+        <div class="mb-3">
+            <label for = "content" class="form-label">내용</label>
+            <textarea name ="content" class ="form-control" rows="10"> 내용을 입력해주세요 </textarea>
+        </div>
+        <input type="submit" value="저장" class="btn btn-primary my-2">
+    </form>
+</div>
+
+</body>
+</html>
