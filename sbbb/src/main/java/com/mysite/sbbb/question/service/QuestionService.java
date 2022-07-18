@@ -35,4 +35,11 @@ public class QuestionService {
         question.setCreateDate(LocalDateTime.now());
         this.questionRepository.save(question);
     }
+
+    public void updateHit(Integer id) {
+        Question question = getQuestion(id);
+        int count = question.getHit();
+        question.setHit(count+1);
+        questionRepository.save(question);
+    }
 }
