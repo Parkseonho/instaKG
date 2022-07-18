@@ -32,8 +32,9 @@ public class QuestionService {
         Question question = new Question();
         question.setSubject(subject);
         question.setContent(content);
+        question.setHit(0);
         question.setCreateDate(LocalDateTime.now());
-        this.questionRepository.save(question);
+        questionRepository.save(question);
     }
 
     public void updateHit(Integer id) {
@@ -42,4 +43,5 @@ public class QuestionService {
         question.setHit(count+1);
         questionRepository.save(question);
     }
+
 }
