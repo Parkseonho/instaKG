@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="SbbbApplication" type="Application" factoryName="Application" activateToolWindowBeforeRun="false" nameIsGenerated="true">
     <option name="MAIN_CLASS_NAME" value="com.mysite.sbbb.SbbbApplication" />
-    <module name="sbbb.sbbb" />
+    <module name="com.mysite.sbbb.main" />
     <extension name="coverage">
       <pattern>
         <option name="PATTERN" value="com.mysite.sbbb.*" />
