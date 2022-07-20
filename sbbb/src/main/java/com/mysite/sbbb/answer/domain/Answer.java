@@ -23,12 +23,10 @@ public class Answer {
     private String content;
 
     private LocalDateTime createDate;
-<<<<<<< Updated upstream
 
     private Boolean replyLike;
 
-=======
->>>>>>> Stashed changes
+
     @ManyToOne
     private Question question;
     @Converter

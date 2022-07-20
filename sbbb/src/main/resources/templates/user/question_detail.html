@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>question detail</title>
-</head>
-<body>
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<link rel="stylesheet" href="text/css" th:href="@{/style.css}">
-<div class="container my-3">
+<html layout:decorate="~{/user/layout}">
+<div layout:fragment="content" class="container my-3">
     <!-- 질문 -->
     <h2 class="border-bottom py-2" th:text="${question.subject}"></h2>
     <div class="card my-3">
@@ -53,5 +45,4 @@
         <input type="submit" value="답변등록" class="btn btn-primary my-2">
     </form>
 </div>
-</body>
 </html>

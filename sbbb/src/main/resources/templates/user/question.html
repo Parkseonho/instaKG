@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<link rel="stylesheet" href="text/css" th:href="@{/style.css}">
-<div class="container my-3">
+<html layout:decorate="~{/user/layout}">
+<div layout:fragment="content" class="container my-3">
     <h2>질문List</h2>
     <table class="table">
         <thead class="table-dark">
@@ -31,5 +23,4 @@
     </table>
     <a th:href="@{/question/create}" class="btn btn-primary">질문 등록</a>
 </div>
-</body>
 </html>
