@@ -17,13 +17,13 @@ import java.util.List;
 public class Question {
     @Id
 
+    private String filename;
+
+    private String filepath;
 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @Column(length = 200)
-    private String subject;
 
     @Column(columnDefinition = "integer default 0", nullable = false)
     private Integer hit;
@@ -35,4 +35,20 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
+
+
+    private Boolean replyLike;
+
+    @Converter
+    class BooleanToYNConverter implements AttributeConverter<Boolean, String> {
+        @Override
+        public String convertToDatabaseColumn(Boolean attribute) {
+            return (attribute != null && attribute) ? "Y" : "N";
+        }
+
+        @Override
+        public Boolean convertToEntityAttribute(String dbData) {
+            return "Y".equals(dbData);
+        }
+    }
 }

@@ -38,3 +38,40 @@ text-align : center;
  color:#C8BEF7 ;
  font-weight : bold;
 }
+
+.imgSize{
+width:300px;
+}
+.likeSize{
+width:20px;
+height : 20px;
+}
+
+.anwerSize{
+width:20px;
+height : 20px;
+margin-bottom:5px;
+}
+.layoutMargin{
+margin:100px auto;
+}
+.kglistMargin{
+padding : 20px 0px;
+}
+
+.like{
+background :url("./like/like.png") no-repeat;
+border : none;
+cursor : pointer;
+}
+
+.unlike{
+background :url("./like/unlike.png") no-repeat;
+border : none;
+cursor : pointer;
+
+}
+
+.InstarDisplayInline{
+display : inline;
+}

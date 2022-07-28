@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 @Controller
@@ -39,12 +40,15 @@ public class QuestionController {
         return "user/question_form";
     }
     @PostMapping("/create")
-    public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-            return "user/question_form";
-        }
-        this.questionService.create(questionForm.getSubject(), questionForm.getContent());
-        return "redirect:/question/list";
+    public String questionPageCreate(Question question, MultipartFile file)throws Exception{
+        questionService.create(question, file);
+        return "user/question";
+    }
+
+    @PostMapping("/like/{id}")
+    public String questionLike(@PathVariable("id") Integer id){
+        this.questionService.setLike(id);
+        return "user/question";
     }
 
 }
