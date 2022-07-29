@@ -48,7 +48,7 @@ public class QuestionController {
     @PostMapping("/like/{id}")
     public String questionLike(@PathVariable("id") Integer id){
         this.questionService.setLike(id);
-        return "user/question";
+        return "redirect:/question/list";
     }
 
 }

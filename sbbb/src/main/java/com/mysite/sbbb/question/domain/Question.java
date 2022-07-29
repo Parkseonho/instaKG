@@ -17,16 +17,20 @@ import java.util.List;
 public class Question {
     @Id
 
-    private String filename;
 
-    private String filepath;
 
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String filename;
+
+    private String filepath;
+
     @Column(columnDefinition = "integer default 0", nullable = false)
     private Integer hit;
+
+    private Boolean replyLike;
 
     @Column(columnDefinition = "TEXT")
     private String content;
@@ -36,8 +40,6 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
 
-
-    private Boolean replyLike;
 
     @Converter
     class BooleanToYNConverter implements AttributeConverter<Boolean, String> {
