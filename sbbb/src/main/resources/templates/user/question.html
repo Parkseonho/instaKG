@@ -20,14 +20,20 @@
         <div th:text="${question.content}"></div>
 
 
-    <div>
+        <div>
         <span th:if="${#lists.size(question.answerList)}!=0">
             <a th:href="@{|/question/detail/${question.id}|}"
                th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
         </span>
-        <span th:if="${#lists.size(question.answerList)}==0">
+            <span th:if="${#lists.size(question.answerList)}==0">
         </span>
-    </div>
+        </div>
+        <div th:each="answer, index : ${question.answerList}">
+            <div th:if="${index.index} == 0">
+                <div style="white-space: pre-line;" th:text="${answer.content}"></div>
+            </div>
+        </div>
+
         <div th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
 
     </div>
