@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.Valid;
 @Controller
 @RequestMapping("/question")
 
@@ -30,7 +27,6 @@ public class QuestionController {
     @RequestMapping("/detail/{id}")
     public String showDetail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm){
         Question question = this.questionService.getQuestion(id);
-        questionService.updateHit(id);
         model.addAttribute("question", question);
         return "user/question_detail";
     }
@@ -42,7 +38,7 @@ public class QuestionController {
     @PostMapping("/create")
     public String questionPageCreate(Question question, MultipartFile file)throws Exception{
         questionService.create(question, file);
-        return "user/question";
+        return "redirect:/question/list";
     }
 
     @PostMapping("/like/{id}")

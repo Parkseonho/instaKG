@@ -10,13 +10,25 @@
     <div class="kglistMargin" th:each="question : ${paging}">
         <img class="imgSize" th:src="${question.filepath}">
         <div>
-            <form  class="InstarDisplayInline" th:action="@{|/question/like/${question.id}|}" method="post">
-                <button th:classappend="${question.replyLike}? 'text-white like': 'text-white unlike' " class="border-0" th:text="_." type = "submit"></button>
+            <form class="InstarDisplayInline" th:action="@{|/question/like/${question.id}|}" method="post">
+                <button th:classappend="${question.replyLike}? 'text-white like': 'text-white unlike' " class="border-0"
+                        th:text="_." type="submit"></button>
             </form>
-            <a class="InstarDisplayInline" th:href="@{|/question/detail/${question.id}|}" ><img class="anwerSize" src="https://cdn-icons.flaticon.com/png/512/3667/premium/3667893.png?token=exp=1658975839~hmac=27ea7761b5a7e37aea807888b8b3fee5"></a>
+            <a class="InstarDisplayInline" th:href="@{|/question/detail/${question.id}|}"><img class="anwerSize"
+                                                                                               src="https://cdn-icons.flaticon.com/png/512/3667/premium/3667893.png?token=exp=1658975839~hmac=27ea7761b5a7e37aea807888b8b3fee5"></a>
         </div>
-        <div  th:text="${question.content}" ></div>
-        <div  th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
+        <div th:text="${question.content}"></div>
+
+
+    <div>
+        <span th:if="${#lists.size(question.answerList)}!=0">
+            <a th:href="@{|/question/detail/${question.id}|}"
+               th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
+        </span>
+        <span th:if="${#lists.size(question.answerList)}==0">
+        </span>
+    </div>
+        <div th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
 
     </div>
 
