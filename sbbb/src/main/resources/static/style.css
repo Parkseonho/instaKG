@@ -32,6 +32,8 @@ text-align : center;
 .nomal{
  color:inherit;
   text-decoration:inherit;
+  color:rgba(192,192,192, 0.5);
+  font-size:11px;
 }
 
 .nomal:hover{
