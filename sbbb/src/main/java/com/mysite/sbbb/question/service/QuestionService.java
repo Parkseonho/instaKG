@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.time.LocalDateTime;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -43,7 +43,32 @@ public class QuestionService {
         }
     }
 
-    public void create(Question question, MultipartFile file) throws Exception {
+    public void create(Question question, List<MultipartFile> files) throws Exception {
+        short result = -1;
+        try {
+            File saveFile;
+            for (MultipartFile file : files) {
+                String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
+
+                UUID uuid = UUID.randomUUID();
+
+                String fileName = uuid + "_" + file.getOriginalFilename();
+
+                saveFile = new File(projectPath, fileName);
+
+                file.transferTo(saveFile);
+            }
+
+
+            result++;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (IllegalStateException e) {
+            throw new RuntimeException(e);
+        }
+    }
+/*
+
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
         UUID uuid = UUID.randomUUID();
@@ -63,7 +88,7 @@ public class QuestionService {
         question.setReplyLike(false);
 
         questionRepository.save(question);
-    }
+    }*/
 
     public void updateHit(Integer id) {
         Question question = getQuestion(id);

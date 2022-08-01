@@ -1,7 +1,7 @@
 <html layout:decorate="~{/user/layout}">
 <div layout:fragment="content" class="container my-3">
     <h2>
-        <a class="nomal" href="#">
+        <a class="nomal_m" href="#">
             <img src="https://ifh.cc/g/LKnGhc.gif" width="30" height="30" alt="list">
             질문List
         </a>
@@ -22,7 +22,7 @@
 
         <div>
         <span th:if="${#lists.size(question.answerList)}!=0">
-            <a class="nomal" th:href="@{|/question/detail/${question.id}|}"
+            <a class="nomal_s" th:href="@{|/question/detail/${question.id}|}"
                th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
         </span>
             <span th:if="${#lists.size(question.answerList)}==0">

@@ -29,13 +29,18 @@ text-align : center;
 text-align : center;
 }
 
-.nomal{
+.nomal_s{
  color:inherit;
   text-decoration:inherit;
   color:rgba(192,192,192, 0.5);
   font-size:11px;
 }
 
+.nomal_m{
+ color:inherit;
+  text-decoration:inherit;
+  color:rgba(192,192,192, 0.5);
+}
 .nomal:hover{
  color:#C8BEF7 ;
  font-weight : bold;

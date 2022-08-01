@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+
 @Controller
 @RequestMapping("/question")
 
@@ -36,7 +39,7 @@ public class QuestionController {
         return "user/question_form";
     }
     @PostMapping("/create")
-    public String questionPageCreate(Question question, MultipartFile file)throws Exception{
+    public String questionPageCreate(Question question, List<MultipartFile> file)throws Exception{
         questionService.create(question, file);
         return "redirect:/question/list";
     }
