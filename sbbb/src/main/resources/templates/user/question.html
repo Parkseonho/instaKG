@@ -61,6 +61,11 @@
           </ul>
       </div>
        페이징처리 끝 -->
-    <a th:href="@{/question/create}" class="btn btn-primary">게시글 등록</a>
+    <div  th:each="question : ${paging}">
+        <form action="@{/question/create}">
+            <input type="hidden" name="id" th:value="${question.id}">
+            <input type="submit" class="btn btn-primary" value="게시글 등록">
+        </form>
+    </div>
 </div>
 </html>

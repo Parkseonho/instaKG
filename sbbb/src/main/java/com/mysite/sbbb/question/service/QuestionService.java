@@ -9,14 +9,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class QuestionService {
@@ -43,30 +40,14 @@ public class QuestionService {
         }
     }
 
-    public void create(Question question, List<MultipartFile> files) throws Exception {
-        short result = -1;
-        try {
-            File saveFile;
-            for (MultipartFile file : files) {
-                String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-
-                UUID uuid = UUID.randomUUID();
-
-                String fileName = uuid + "_" + file.getOriginalFilename();
-
-                saveFile = new File(projectPath, fileName);
-
-                file.transferTo(saveFile);
-            }
-
-
-            result++;
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalStateException e) {
-            throw new RuntimeException(e);
-        }
+    public void create(Question question) {
+        Question questions = new Question();
+        questions.setContent(question.getContent());
+        questions.setCreateDate(LocalDateTime.now());
+        questions.setReplyLike(false);
+        questionRepository.save(questions);
     }
+
 /*
 
         String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";

@@ -1,5 +1,6 @@
 package com.mysite.sbbb.question.controller;
 
+import com.mysite.sbbb.Files.FilesService;
 import com.mysite.sbbb.answer.AnswerForm;
 import com.mysite.sbbb.question.QuestionForm;
 import com.mysite.sbbb.question.domain.Question;
@@ -19,6 +20,8 @@ import java.util.List;
 public class QuestionController {
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private FilesService filesService;
 
     @RequestMapping("/list")
     public String showQuestions(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -35,14 +38,20 @@ public class QuestionController {
     }
 
     @GetMapping("/create")
-    public String questionCreate(QuestionForm questionForm){
+    public String questionCreate(QuestionForm questionForm, Integer questionId, Model model){
+        Question question = questionService.getQuestion(questionId);
+        model.addAttribute("question",question);
         return "user/question_form";
     }
+
     @PostMapping("/create")
-    public String questionPageCreate(Question question, List<MultipartFile> file)throws Exception{
-        questionService.create(question, file);
+    public String questionPageCreate(Integer questionId, List<MultipartFile> file)throws Exception{
+        Question question = questionService.getQuestion(questionId);
+        questionService.create(question);
+        filesService.create(question, file);
         return "redirect:/question/list";
     }
+
 
     @PostMapping("/like/{id}")
     public String questionLike(@PathVariable("id") Integer id){
