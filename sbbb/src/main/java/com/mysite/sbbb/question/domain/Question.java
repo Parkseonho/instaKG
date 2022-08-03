@@ -3,7 +3,6 @@ package com.mysite.sbbb.question.domain;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mysite.sbbb.answer.domain.Answer;
-import com.mysite.sbbb.Files.domain.Files;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,8 +37,6 @@ public class Question {
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
-    private List<Files> filesList;
 
 
     @Converter

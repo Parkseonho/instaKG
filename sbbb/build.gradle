@@ -29,9 +29,10 @@ dependencies {
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'mysql:mysql-connector-java'
+	spring.servlet.multipart.max-file-size
+	spring.servlet.multipart.max-request-size
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'commons-io:commons-io:2.6'
 }
 
 tasks.named('test') {
