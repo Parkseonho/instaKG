@@ -9,6 +9,7 @@
 
     <div class="kglistMargin" th:each="question : ${paging}">
         <img class="imgSize" th:src="${question.filepath}">
+        <video class="imgSize" controls th:src="${question.filepath}"></video>
         <div>
             <form class="InstarDisplayInline" th:action="@{|/question/like/${question.id}|}" method="post">
                 <button th:classappend="${question.replyLike}? 'text-white like': 'text-white unlike' " class="border-0"
