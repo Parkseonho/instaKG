@@ -16,17 +16,14 @@ html > body button {
   text-underline-position:under;
 }
 
-body{
-background-color : #F0FBFA;
+
+.WidthCenter{
+width : 320px;
 }
 
 .tableC{
-background-color :#fff;
-text-align : center;
-}
-
-.tcenter {
-text-align : center;
+width : 320px;
+background-color :#000;
 }
 
 .nomal_s{
@@ -39,10 +36,11 @@ text-align : center;
 .nomal_m{
  color:inherit;
   text-decoration:inherit;
-  color:rgba(192,192,192, 0.5);
+  color:rgba(192,192,192, 1);
+  margin : 10px;
 }
 .nomal:hover{
- color:#C8BEF7 ;
+  color:rgba(255,255,255, 1);
  font-weight : bold;
 }
 
@@ -59,30 +57,28 @@ width:20px;
 height : 20px;
 margin-bottom:5px;
 }
-.layoutMargin{
-margin:100px auto;
-}
-.kglistMargin{
-padding : 20px 0px;
+.kglistPadding{
+padding : 10px 10px;
 }
 
 .like{
-background :url("./like/like.png") no-repeat;
+background :url("./icon/like.png") no-repeat;
 border : none;
 cursor : pointer;
 }
 
 .unlike{
-background :url("./like/unlike.png") no-repeat;
+background :url("./icon/unlike.png") no-repeat;
 border : none;
 cursor : pointer;
 
 }
 
-.logo{
-background :url("./logo/MainLogo.png") no-repeat;
+.answerIcon{
+background :url("./icon/answer.png") no-repeat;
 border : none;
 cursor : pointer;
+
 }
 
 .InstarDisplayInline{
@@ -91,4 +87,8 @@ display : inline;
 
 .detailBorder{
 border:1px solid rgba(192,192,192, 0.5);
+}
+
+.User{
+text-align:left;
 }

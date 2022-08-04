@@ -9,15 +9,30 @@
 <link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
 <link rel="stylesheet" href="text/css" th:href="@{/style.css}">
 <div layout:fragment="content" class="container">
-    <h5 class="my-3 border-bottom pb-2">질문등록</h5>
+    <h3 class="mt-3">
+        <a class="nomal_m" th:href="@{/question/list}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            새 게시물
+        </a>
+    </h3>
     <form th:action="@{/question/create}" enctype="multipart/form-data" th:object="${questionForm}" method="post">
         <div th:replace="user/form_errors :: formErrorsFragment"></div>
         <div class="mb-3">
             <textarea name="content" class="form-control" placeholder="내용"></textarea>
-            <input  multiple="multiple" type="file" class="form-control" name="file">
+            <input multiple="multiple" type="file" class="form-control" name="file">
         </div>
-        <input type="submit" value="저장하기" class="btn btn-primary my-2">
+        <button type="submit" class="btn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+            </svg>
+        </button>
     </form>
+
+
 </div>
 
 </body>
