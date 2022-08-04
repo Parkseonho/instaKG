@@ -79,6 +79,12 @@ cursor : pointer;
 
 }
 
+.logo{
+background :url("./logo/MainLogo.png") no-repeat;
+border : none;
+cursor : pointer;
+}
+
 .InstarDisplayInline{
 display : inline;
 }
