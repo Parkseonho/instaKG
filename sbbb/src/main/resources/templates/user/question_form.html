@@ -19,10 +19,15 @@
             새 게시물
         </a>
     </h3>
+
     <form th:action="@{/question/create}" enctype="multipart/form-data" th:object="${questionForm}" method="post">
         <div th:replace="user/form_errors :: formErrorsFragment"></div>
         <div class="mb-3">
-            <textarea name="content" class="form-control" placeholder="내용"></textarea>
+            <label for="content" class="form-label">내용</label>
+            <textarea th:field="*{content}" name="content" class="form-control" placeholder="내용"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="file" class="form-label">사진/영상</label>
             <input multiple="multiple" type="file" class="form-control" name="file">
         </div>
         <button type="submit" class="btn">

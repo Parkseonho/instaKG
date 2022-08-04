@@ -47,8 +47,6 @@ public class QuestionService {
     public void create(Question question, List<MultipartFile> files) throws Exception {
         String fileName = null;
         File saveFile;
-
-
         try {
 
             for (MultipartFile file : files) {
