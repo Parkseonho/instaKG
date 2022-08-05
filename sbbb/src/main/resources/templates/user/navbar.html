@@ -1,16 +1,16 @@
-<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/question/list"><img src="https://cdn.discordapp.com/attachments/993375184193077272/1004543162099966042/MainLogo.png" width="50" height="50">instaKG</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">로그인</a>
-                </li>
-            </ul>
+
+<nav th:fragment="navbarFragment" class="navbar">
+    <div class="nav-wrapper">
+        <a class="navbar-brand" href="/">
+            <img width="45" height="45" src="/logo/MainLogo.png" alt=""/></a>
+        <input type="text" class="search-box" placeholder="search">
+        <div class="nav-items">
+            <img src="img/home.PNG" class="icon" alt="">
+            <img src="img/messenger.PNG" class="icon" alt="">
+            <img src="img/add.PNG" class="icon" alt="">
+            <img src="img/explore.PNG" class="icon" alt="">
+            <img src="img/like.PNG" class="icon" alt="">
+            <div class="icon user-profile"></div>
         </div>
     </div>
 </nav>

@@ -1,72 +1,289 @@
-<html layout:decorate="~{/user/layout}" >
+<html layout:decorate="~{/user/layout}">
 <div layout:fragment="content" class="container row" style="float: none; margin:100 auto;">
-    <div class="col-md-3" style="float: none; margin:0 auto;">
-        <h2>
-            <a class="nomal_m" th:href="@{/question/list}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-arrow-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-                </svg>
-                게시물
-            </a>
+    <h2>
+        <a class="nomal_m" th:href="@{/question/list}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            게시물
+        </a>
 
-            <!--게시글 등록-->
-            <a th:href="@{/question/create}" >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-plus-square" viewBox="0 0 16 16">
-                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                </svg>
-            </a>
-        </h2>
+        <!--게시글 등록-->
+        <a th:href="@{/question/create}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-plus-square" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </a>
+    </h2>
+    <section class="main">
+        <div class="wrapper">
+            <div class="left-col">
 
-        <div class="kglistPadding tableC " th:each="question : ${question}">
-            <!--사용자 및 기능-->
-            <div class="justify-content-between">
 
-                <img class="img-responsive left-block rounded-circle"
-                     src="https://cdn.discordapp.com/attachments/981434976937578518/1002008325480787988/1658217808566.jpg"
-                     width="25" height="25" alt="list">
+            <div class="kglistPadding tableC " th:each="question : ${question}">
+                <!--사용자 및 기능-->
+                <div class="justify-content-between">
 
-                <span class="text-right text-white">...</span>
+                    <img class="img-responsive left-block rounded-circle"
+                         src="https://cdn.discordapp.com/attachments/981434976937578518/1002008325480787988/1658217808566.jpg"
+                         width="25" height="25" alt="list">
 
-            </div>
+                    <span class="text-right text-white">...</span>
 
-            <!--  사진 및 동영상 -->
-            <div>
-                <img th:if="${question.filepath.contains('jpg')}" class="ratio ratio-1x1" th:src="${question.filepath}">
-                <video th:unless="${question.filepath.contains('jpg')}" class="ratio ratio-1x1" controls
-                       th:src="${question.filepath}"></video>
-            </div>
-            <!--좋아요, 댓글-->
-            <div>
-                <form class="InstarDisplayInline" th:action="@{|/question/like/${question.id}|}" method="post">
-                    <button th:classappend="${question.replyLike}? 'like': 'unlike' "
-                            class="border-0"
-                            th:text="_." type="submit"></button>
-                </form>
-                <a class="InstarDisplayInline" th:href="@{|/question/detail/${question.id}|}"><img class="anwerSize"
-                                                                                                   src="https://cdn.discordapp.com/attachments/984093073330016308/1004596412241166346/unknown.png"></a>
-            </div>
-            <!--내용, 답변, 일자-->
-            <div class="text-white" th:text="${question.content}"></div>
-            <div>
+                </div>
+
+                <!--  사진 및 동영상 -->
+                <div>
+                    <img th:if="${question.filepath.contains('jpg')}" class="ratio ratio-1x1"
+                         th:src="${question.filepath}">
+                    <video th:unless="${question.filepath.contains('jpg')}" class="ratio ratio-1x1" controls
+                           th:src="${question.filepath}"></video>
+                </div>
+                <!--좋아요, 댓글-->
+                <div>
+                    <form class="InstarDisplayInline" th:action="@{|/question/like/${question.id}|}" method="post">
+                        <button th:classappend="${question.replyLike}? 'like': 'unlike' "
+                                class="border-0"
+                                th:text="_." type="submit"></button>
+                    </form>
+                    <a class="InstarDisplayInline" th:href="@{|/question/detail/${question.id}|}"><img class="anwerSize"
+                                                                                                       src="https://cdn.discordapp.com/attachments/984093073330016308/1004596412241166346/unknown.png"></a>
+                </div>
+                <!--내용, 답변, 일자-->
+                <div class="text-white" th:text="${question.content}"></div>
+                <div>
                <span th:if="${#lists.size(question.answerList)}!=0">
                       <a class="nomal_s" th:href="@{|/question/detail/${question.id}|}"
                          th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
                  </span>
-                <span th:if="${#lists.size(question.answerList)}==0">
+                    <span th:if="${#lists.size(question.answerList)}==0">
                     </span>
+                </div>
+                <div th:each="answer, index : ${question.answerList}">
+                    <div th:if="${index.index} == 0">
+                        <div class="text-white" style="white-space: pre-line;" th:text="${answer.content}"></div>
+                    </div>
+                </div>
+                <div class="text-white" th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
             </div>
-            <div th:each="answer, index : ${question.answerList}">
-                <div th:if="${index.index} == 0">
-                    <div class="text-white" style="white-space: pre-line;" th:text="${answer.content}"></div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body center">
+
+                    <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">
+                        <div>
+                            삭제
+                        </div>
+                    </a>
+                    <hr>
+
+
+                    <a href="javascript:move('/setting/modify/');">
+                        <div>
+                            수정
+                        </div>
+                    </a>
+                    <hr>
+
+                    <a href="javascript:move('/board/post/detail/');">
+                        <div>
+                            게시글로 이동
+                        </div>
+                    </a>
+                    <hr>
+
+                    <a href="" onclick="javascript:copy();">
+                        <div>
+                            링크 복사
+                        </div>
+                    </a>
+                    <hr>
+
+                    <a href="">
+                        <div>
+                            팔로우
+                        </div>
+                    </a>
+                    <hr>
+
+                    <a href="" onclick="javascript:url()" data-bs-target="#exampleModalToggle3" data-bs-toggle="modal"
+                       data-bs-dismiss="modal">
+                        <div>
+                            공유
+                        </div>
+                    </a>
+                    <hr>
+
+                    <a href="" data-bs-dismiss="modal">
+                        <div>
+                            취소
+                        </div>
+                    </a>
                 </div>
             </div>
-            <div class="text-white" th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
         </div>
-
     </div>
+
+    <!-- modal 2 -->
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    삭제하시겠습니까?
+                </div>
+                <div class="modal-body center">
+                    <a href="javascript:move('/board/delete/');">
+                        <div>
+                            확인
+                        </div>
+                    </a>
+                    <hr>
+                    <a href="" data-bs-dismiss="modal">
+                        <div>
+                            취소
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal 3 -->
+    <div class="modal fade" id="exampleModalToggle3" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    공유하기
+                </div>
+                <div class="modal-body center">
+                    <a id="btnTwitter" class="link-icon twitter" href="javascript:shareTwitter();">트위터</a>
+                    <a id="btnKakao" class="link-icon kakao" href="javascript:sendLinkDefault();">카카오톡</a>
+
+                    <hr>
+
+                    <input type="text" id="ShareUrl">
+                    <span class="btn-type1">
+                        <button OnClick="javascript:CopyUrlToClipboard()">URL 복사</button>
+                    </span>
+                    <hr>
+                    <a href="" data-bs-dismiss="modal">
+                        <div>
+                            취소
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<script layout:fragment="script" type='text/javascript'>
+function url(){
+    var obShareUrl = document.getElementById("ShareUrl");
+    obShareUrl.value = window.document.location.href;
+}
+
+//링크 복사
+function copy(){
+	var url = '';
+	var textarea = document.createElement("textarea");
+	document.body.appendChild(textarea);
+	url = window.document.location.href + "/detail/" + sessionStorage.getItem("board.id") ;
+	textarea.value = url;
+	textarea.select();
+	textarea.focus();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);
+	alert("URL이 복사되었습니다.");
+}
+
+function CopyUrlToClipboard(){
+	var obShareUrl = document.getElementById("ShareUrl");
+	obShareUrl.value = window.document.location.href + "/detail/" + sessionStorage.getItem("board.id") ;
+
+	obShareUrl.select();
+	document.execCommand("copy");
+
+	alert("URL이 클립보드에 복사되었습니다");
+}
+
+
+//트위터 공유
+/*<![CDATA[*/
+function shareTwitter(){
+    var sendText = sessionStorage.getItem("board_title");
+    var sendUrl = document.URL;
+    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+    /*]]>*/
+}
+
+
+//카톡 공유
+ try {
+ /*<![CDATA[*/
+  Kakao.init('4961c3cbaa448fb5f0e3995a72595dcc')
+  function sendLinkDefault() {
+    var sendUrl = document.URL;
+    Kakao.Link.sendDefault({
+      objectType: 'feed',
+      content: {
+        title: sessionStorage.getItem("board_title"),
+        description: sessionStorage.getItem("board_content"),
+        imageUrl:
+          'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587514212_1078.jpg',
+        link: {
+          mobileWebUrl: sendUrl,
+          webUrl: sendUrl,
+        },
+      },
+      social: {
+        likeCount: 286,
+        commentCount: 45,
+        sharedCount: 845,
+      },
+      buttons: [
+        {
+          title: '웹으로 보기',
+          link: {
+            mobileWebUrl: sendUrl,
+            webUrl: sendUrl,
+          },
+        },
+      ],
+    })
+  }
+; window.kakaoDemoCallback && window.kakaoDemoCallback() /*]]>*/}
+catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
+
+
+//modal에 정보전달
+$('#exampleModal').on('show.bs.modal', function (e) {
+    var boardId = $(e.relatedTarget).data('id');
+    var boardTitle = $(e.relatedTarget).data('title');
+    var boardContent = $(e.relatedTarget).data('content');
+	sessionStorage.setItem("board_id", boardId);
+	sessionStorage.setItem("board_title", boardTitle);
+	sessionStorage.setItem("board_content", boardContent);
+});
+
+function move(url){
+    location.href = url+sessionStorage.getItem("board_id");
+    sessionStorage.removeItem("board_id");
+}
+
+
+</script>
+<!-- 자바스크립트 -->
 </html>
