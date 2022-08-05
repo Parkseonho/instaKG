@@ -1,4 +1,4 @@
-<html layout:decorate="~{/user/layout}">
+<html layout:decorate="~{/user/layout}" xmlns="http://www.w3.org/1999/html">
 <div layout:fragment="content" class="container row" style="float: none; margin:100 auto;">
     <h2>
         <a class="nomal_m" th:href="@{/question/list}">
@@ -22,53 +22,74 @@
     <section class="main">
         <div class="wrapper">
             <div class="left-col">
-
-
-            <div class="kglistPadding tableC " th:each="question : ${question}">
-                <!--사용자 및 기능-->
-                <div class="justify-content-between">
-
-                    <img class="img-responsive left-block rounded-circle"
-                         src="https://cdn.discordapp.com/attachments/981434976937578518/1002008325480787988/1658217808566.jpg"
-                         width="25" height="25" alt="list">
-
-                    <span class="text-right text-white">...</span>
-
-                </div>
-
-                <!--  사진 및 동영상 -->
-                <div>
-                    <img th:if="${question.filepath.contains('jpg')}" class="ratio ratio-1x1"
-                         th:src="${question.filepath}">
-                    <video th:unless="${question.filepath.contains('jpg')}" class="ratio ratio-1x1" controls
-                           th:src="${question.filepath}"></video>
-                </div>
-                <!--좋아요, 댓글-->
-                <div>
-                    <form class="InstarDisplayInline" th:action="@{|/question/like/${question.id}|}" method="post">
-                        <button th:classappend="${question.replyLike}? 'like': 'unlike' "
-                                class="border-0"
-                                th:text="_." type="submit"></button>
-                    </form>
-                    <a class="InstarDisplayInline" th:href="@{|/question/detail/${question.id}|}"><img class="anwerSize"
-                                                                                                       src="https://cdn.discordapp.com/attachments/984093073330016308/1004596412241166346/unknown.png"></a>
-                </div>
-                <!--내용, 답변, 일자-->
-                <div class="text-white" th:text="${question.content}"></div>
-                <div>
-               <span th:if="${#lists.size(question.answerList)}!=0">
-                      <a class="nomal_s" th:href="@{|/question/detail/${question.id}|}"
-                         th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
-                 </span>
-                    <span th:if="${#lists.size(question.answerList)}==0">
-                    </span>
-                </div>
-                <div th:each="answer, index : ${question.answerList}">
-                    <div th:if="${index.index} == 0">
-                        <div class="text-white" style="white-space: pre-line;" th:text="${answer.content}"></div>
+                <div th:each="question : ${question}">
+                    <div class="post">
+                        <div class="info">
+                            <div class="user">
+                                <!--사용자-->
+                                <img class="img-responsive left-block rounded-circle"
+                                     src="https://cdn.discordapp.com/attachments/981434976937578518/1002008325480787988/1658217808566.jpg"
+                                     width="25" height="25" alt="list">
+                                <p class="username">꼬솜우비</p>
+                            </div>
+                            <!--옵션(모달창)-->
+                            <button type="button" class="btn" id="myModal" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" th:data-id="${question.id}"
+                                    th:data-content="${question.content}">
+                                <img src="https://img.icons8.com/stickers/344/ellipsis.png" width="20" height="20" alt="">
+                            </button>
+                        </div>
+                        <!--  사진 및 동영상 -->
+                            <img th:if="${question.filepath.contains('jpg')}" class="ratio ratio-1x1"
+                                 th:src="${question.filepath}">
+                            <video th:unless="${question.filepath.contains('jpg')}" class="ratio ratio-1x1" controls
+                                   th:src="${question.filepath}"></video>
+                        <!--좋아요, 댓글-->
+                        <div class="post-content">
+                            <div class="reaction-wrapper">
+                                <form class="icon" th:action="@{|/question/like/${question.id}|}"
+                                      method="post">
+                                    <button th:classappend="${question.replyLike}? 'like': 'unlike' "
+                                            class="border-0"
+                                            th:text="좋아요" type="submit"></button>
+                                </form>
+                                <a th:href="@{|/question/detail/${question.id}|}"><img
+                                        class="icon"
+                                        src="https://cdn.discordapp.com/attachments/984093073330016308/1004596412241166346/unknown.png"></a>
+                                <img src="/images/icon-kakao.PNG" class="save icon" alt="">
+                            </div>
+                            <!--내용, 답변, 일자-->
+                            <p class="description">
+                            <div th:text="${question.content}"></div>
+                            <!--답변유무에 따라 답변 모두 보기 표시-->
+                            <div>
+                                <div>
+                                          <span th:if="${#lists.size(question.answerList)}!=0">
+                                           <a  th:href="@{|/question/detail/${question.id}|}"
+                                              th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
+                                         </span>
+                                    <span th:if="${#lists.size(question.answerList)}==0"></span>
+                                </div>
+                                <!--답변 한개 표시-->
+                                <div th:each="answer, index : ${question.answerList}">
+                                    <div th:if="${index.index} == 0">
+                                        <div  style="white-space: pre-line;"
+                                             th:text="${answer.content}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            </p>
+                            <p class="post-time">
+                            <div th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
+                            </p>
+                       </div>
+                        <div class="comment-wrapper">
+                            <img src="/icon/like.png" class="icon" alt="">
+                            <input type="text" class="comment-box" placeholder="Add a comment">
+                            <button class="comment-btn">post</button>
+                        </div>
                     </div>
                 </div>
-                <div class="text-white" th:text="${#temporals.format(question.createDate, 'M월 d일')}"></div>
             </div>
         </div>
     </section>
@@ -282,6 +303,11 @@ function move(url){
     location.href = url+sessionStorage.getItem("board_id");
     sessionStorage.removeItem("board_id");
 }
+
+
+
+
+
 
 
 </script>

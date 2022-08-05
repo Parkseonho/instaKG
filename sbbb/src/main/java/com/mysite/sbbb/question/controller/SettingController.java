@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.validation.Valid;
 
 
@@ -19,20 +18,13 @@ import javax.validation.Valid;
 public class SettingController {
     private final QuestionService questionService;
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        Question question = this.questionService.getQuestion(id);
-        this.questionService.delete(question);
-        return "redirect:/board/post";
-    }
-
 
     @GetMapping("/modify/{id}")
     public String modify(Model model, @PathVariable("id") Integer id, QuestionForm questionForm) {
         Question question = this.questionService.getQuestion(id);
         questionForm.setContent(questionForm.getContent());
         model.addAttribute("question", question);
-        return "/modify";
+        return "user/modify";
     }
 
     @PostMapping("/modify/{id}")
@@ -40,10 +32,10 @@ public class SettingController {
         Question question = this.questionService.getQuestion(id);
         if (bindingResult.hasErrors()) {
             model.addAttribute("question", question);
-            return "/modify";
+            return "user/modify";
         }
         this.questionService.modify(question, questionForm.getContent(), onOff);
-        return String.format("redirect:/board/post/detail/%s", id);
+        return "redirect:/question/list";
     }
 
 

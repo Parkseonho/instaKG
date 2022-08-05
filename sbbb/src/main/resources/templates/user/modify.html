@@ -11,7 +11,7 @@
                             <p class="username">modern_web_channel</p>
                         </div>
                     </div>
-                    <form th:action="@{|/setting/modify/${board.id}|}" th:object="${boardForm}" method="post">
+                    <form th:action="@{|/setting/modify/${question.id}|}" th:object="${questionForm}" method="post">
                         <div th:replace="/form_error :: formErrorsFragment"></div>
                         <img src="/images/kosom.PNG" class="post-image" alt="">
                         <div class="post-content">
@@ -33,7 +33,7 @@
 
                             <div class="comment-wrapper">
                                 <div class="form-check form-switch">
-                                    <div th:if="!${board.onOff}">
+                                    <div th:if="!${question.onOff}">
                                         <input class="form-check-input" type="checkbox" name="onOff" id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">댓글막기</label>
                                     </div>
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <input type="submit" value="저장하기" class="comment-btn">
-                                <a th:href="@{|/board/post/detail/${board.id}|}" class="comment-btn">취소</a>
+                                <a th:href="@{|/board/post/detail/${question.id}|}" class="comment-btn">취소</a>
                             </div>
                         </div>
                     </form>
