@@ -20,10 +20,11 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
+
     @RequestMapping("/list")
     public String showQuestions(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
         Page<Question> paging = this.questionService.getList(page);
-        model.addAttribute("paging",paging);
+        model.addAttribute("question",paging);
         return "user/question";
     }
 

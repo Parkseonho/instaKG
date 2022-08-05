@@ -25,13 +25,13 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public List<Question> getList() {
-        return questionRepository.findAll();
+        return this.questionRepository.findAll();
     }
 
     public Page<Question> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
-        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.questionRepository.findAll(pageable);
     }
 
@@ -80,35 +80,15 @@ public class QuestionService {
             throw new RuntimeException(e);
         }
     }
+
 /*
-
-        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-
-        UUID uuid = UUID.randomUUID();
-
-        String fileName = uuid + "_" + file.getOriginalFilename();
-
-        File saveFile = new File(projectPath, fileName);
-
-        file.transferTo(saveFile);
-
-        question.setFilename(fileName);
-
-        question.setFilepath("/files/" + fileName);
-
-        question.setCreateDate(LocalDateTime.now());
-
-        question.setReplyLike(false);
-
-        questionRepository.save(question);
-    }*/
-
     public void updateHit(Integer id) {
         Question question = getQuestion(id);
         int count = question.getHit();
         question.setHit(count + 1);
         questionRepository.save(question);
     }
+*/
 
     public void setLike(Integer questionId) {
         Question question = questionRepository.findById(questionId).get();
@@ -121,4 +101,14 @@ public class QuestionService {
         this.questionRepository.save(question);
     }
 
+    public void delete(Question question){
+        this.questionRepository.delete(question);
+    }
+
+    public void modify(Question question, String content, Boolean onOff){
+        question.setContent(content);
+        question.setModifyDate(LocalDateTime.now());
+        question.setOnOff(onOff);
+        this.questionRepository.save(question);
+    }
 }
