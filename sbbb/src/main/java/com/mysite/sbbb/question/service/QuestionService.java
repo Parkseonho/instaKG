@@ -29,6 +29,7 @@ public class QuestionService {
     }
 
     public Page<Question> getList(int page) {
+
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
@@ -48,6 +49,16 @@ public class QuestionService {
         String fileName = null;
         File saveFile;
         try {
+/*
+            String totalFile = "";
+            String totalFilePath = "";
+            for(MultipartFile file : files){
+                UUID uuid = UUID.randomUUID();
+                fileName = uuid + "_" + file.getOriginalFilename();
+                totalFile += fileName + "**";
+                totalFilePath += "/files/" + fileName + "**";
+            }
+*/
 
             for (MultipartFile file : files) {
                 String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
