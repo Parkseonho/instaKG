@@ -25,13 +25,25 @@ public class QuestionController {
     private AnswerService answerService;
 
 
+/*
     @RequestMapping("/list")
     public String showQuestions(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
         Page<Question> paging = this.questionService.getList(page);
         model.addAttribute("question",paging);
         return "user/question";
     }
+*/
 
+    @RequestMapping("/list")
+    public String showQuestions(Model model, Question question,  @RequestParam(value = "page", defaultValue = "0") int page) {
+        Page<Question> questions = this.questionService.getList(question, page);
+        String fileName = question.getFilepath();
+        String arr[] = fileName.split("\\*");
+
+        model.addAttribute("question",arr);
+        model.addAttribute("question",questions);
+        return "user/question";
+    }
     @RequestMapping("/detail/{id}")
     public String showDetail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm){
         Question question = this.questionService.getQuestion(id);

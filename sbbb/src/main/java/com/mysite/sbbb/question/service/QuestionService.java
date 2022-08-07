@@ -14,10 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class QuestionService {
@@ -28,8 +25,7 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
-    public Page<Question> getList(int page) {
-
+    public Page<Question> getList(Question question, int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
@@ -49,31 +45,29 @@ public class QuestionService {
         String fileName = null;
         File saveFile;
         try {
-/*
             String totalFile = "";
             String totalFilePath = "";
             for(MultipartFile file : files){
                 UUID uuid = UUID.randomUUID();
                 fileName = uuid + "_" + file.getOriginalFilename();
-                totalFile += fileName + "**";
-                totalFilePath += "/files/" + fileName + "**";
+                totalFile += fileName + "*";
+                totalFilePath += "/files/" + fileName + "*";
             }
-*/
 
             for (MultipartFile file : files) {
                 String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
-                UUID uuid = UUID.randomUUID();
+           /*     UUID uuid = UUID.randomUUID();
 
-                fileName = uuid + "_" + file.getOriginalFilename();
+                fileName = uuid + "_" + file.getOriginalFilename();*/
 
                 saveFile = new File(projectPath, fileName);
 
                 file.transferTo(saveFile);
 
-                question.setFilepath("/files/" + fileName);
+                question.setFilepath(totalFilePath);
 
-                question.setFilename(fileName);
+                question.setFilename(totalFile);
 
                 question.setCreateDate(LocalDateTime.now());
 
