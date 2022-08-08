@@ -64,20 +64,24 @@
                             <!--내용, 답변, 일자-->
                             <p class="description">
                             <div th:text="${question.content}"></div>
-                            <!--답변유무에 따라 답변 모두 보기 표시-->
-                            <div>
+                            <!--답변 on off-->
+                            <div th:if="!${question.onOff}">
+                                <!--답변유무에 따라 답변 모두 보기 표시-->
                                 <div>
+                                    <div>
                                           <span th:if="${#lists.size(question.answerList)}!=0">
                                            <a th:href="@{|/question/detail/${question.id}|}"
                                               th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
                                          </span>
-                                    <span th:if="${#lists.size(question.answerList)}==0"></span>
-                                </div>
-                                <!--답변 한개 표시-->
-                                <div th:each="answer, index : ${question.answerList}">
-                                    <div th:if="${index.index} == 0">
-                                        <div style="white-space: pre-line;"
-                                             th:text="${answer.content}"></div>
+                                        <span th:if="${#lists.size(question.answerList)}==0"></span>
+                                    </div>
+
+                                    <!--답변 한개 표시-->
+                                    <div th:each="answer, index : ${question.answerList}">
+                                        <div th:if="${index.index} == 0">
+                                            <div style="white-space: pre-line;"
+                                                 th:text="${answer.content}"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -90,8 +94,13 @@
                         <!--댓글 달기-->
                         <form th:action="@{|/question/create/${question.id}|}" method="post"
                               class="my-3">
-<!--                            <div th:replace="user/form_errors :: formErrorsFragment"></div>-->
-                            <div class="comment-wrapper">
+                            <!--                            <div th:replace="user/form_errors :: formErrorsFragment"></div>-->
+                            <div class="comment-wrapper" th:if="${question.onOff}">
+                                <img src="/icon/like.png" class="icon" alt="">
+                                <input name="content" type="text" class="comment-box" placeholder="Add a comment" disabled/>
+                                <button type="submit" class="comment-btn">post</button>
+                            </div>
+                            <div class="comment-wrapper" th:unless="${question.onOff}">
                                 <img src="/icon/like.png" class="icon" alt="">
                                 <input name="content" type="text" class="comment-box" placeholder="Add a comment">
                                 <button type="submit" class="comment-btn">post</button>
@@ -120,13 +129,6 @@
                     <a href="javascript:move('/setting/modify/');">
                         <div>
                             수정
-                        </div>
-                    </a>
-                    <hr>
-
-                    <a href="javascript:move('/board/post/detail/');">
-                        <div>
-                            게시글로 이동
                         </div>
                     </a>
                     <hr>
@@ -172,7 +174,7 @@
                     삭제하시겠습니까?
                 </div>
                 <div class="modal-body center">
-                    <a href="javascript:move('/board/delete/');">
+                    <a href="javascript:move('/setting/delete/');">
                         <div>
                             확인
                         </div>
@@ -222,7 +224,7 @@
 <script layout:fragment="script" type='text/javascript'>
 function url(){
     var obShareUrl = document.getElementById("ShareUrl");
-    obShareUrl.value = window.document.location.href;
+	obShareUrl.value = window.document.location.href + "/detail/" + sessionStorage.getItem("question.id") ;
 }
 
 //링크 복사
@@ -230,7 +232,7 @@ function copy(){
 	var url = '';
 	var textarea = document.createElement("textarea");
 	document.body.appendChild(textarea);
-	url = window.document.location.href + "/detail/" + sessionStorage.getItem("board.id") ;
+	url = window.document.location.href + "/detail/" + sessionStorage.getItem("question_id") ;
 	textarea.value = url;
 	textarea.select();
 	textarea.focus();
@@ -241,7 +243,7 @@ function copy(){
 
 function CopyUrlToClipboard(){
 	var obShareUrl = document.getElementById("ShareUrl");
-	obShareUrl.value = window.document.location.href + "/detail/" + sessionStorage.getItem("board.id") ;
+	obShareUrl.value = window.document.location.href + "/detail/" + sessionStorage.getItem("question_id") ;
 
 	obShareUrl.select();
 	document.execCommand("copy");
@@ -253,9 +255,8 @@ function CopyUrlToClipboard(){
 //트위터 공유
 /*<![CDATA[*/
 function shareTwitter(){
-    var sendText = sessionStorage.getItem("board_title");
     var sendUrl = document.URL;
-    window.open("https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl);
+    window.open("https://twitter.com/intent/tweet?url=" + sendUrl);
     /*]]>*/
 }
 
@@ -300,19 +301,19 @@ catch(e) { window.kakaoDemoException && window.kakaoDemoException(e) }
 
 //modal에 정보전달
 $('#exampleModal').on('show.bs.modal', function (e) {
-    var boardId = $(e.relatedTarget).data('id');
-    var boardTitle = $(e.relatedTarget).data('title');
-    var boardContent = $(e.relatedTarget).data('content');
-	sessionStorage.setItem("board_id", boardId);
-	sessionStorage.setItem("board_title", boardTitle);
-	sessionStorage.setItem("board_content", boardContent);
+    var questionId = $(e.relatedTarget).data('id');
+    var questionContent = $(e.relatedTarget).data('content');
+	sessionStorage.setItem("question_id", questionId);
+	sessionStorage.setItem("question_content", questionContent);
 });
 
 function move(url){
-    location.href = url+sessionStorage.getItem("board_id");
-    sessionStorage.removeItem("board_id");
+    location.href = url+sessionStorage.getItem("question_id");
+    sessionStorage.removeItem("question_id");
 }
 //파일이름 쪼개기
+
+
 
 
 

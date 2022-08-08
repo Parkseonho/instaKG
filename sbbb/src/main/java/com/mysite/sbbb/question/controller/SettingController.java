@@ -18,6 +18,12 @@ import javax.validation.Valid;
 public class SettingController {
     private final QuestionService questionService;
 
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        Question question = this.questionService.getQuestion(id);
+        this.questionService.delete(question);
+        return "redirect:/question/list";
+    }
 
     @GetMapping("/modify/{id}")
     public String modify(Model model, @PathVariable("id") Integer id, QuestionForm questionForm) {

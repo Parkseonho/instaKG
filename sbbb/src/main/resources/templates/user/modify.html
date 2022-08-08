@@ -11,8 +11,7 @@
                             <p class="username">modern_web_channel</p>
                         </div>
                     </div>
-                    <form th:action="@{|/setting/modify/${question.id}|}" th:object="${questionForm}" method="post">
-                        <div th:replace="/form_error :: formErrorsFragment"></div>
+                    <form th:action="@{|/setting/modify/${question.id}|}" method="post">
                         <img src="/images/kosom.PNG" class="post-image" alt="">
                         <div class="post-content">
                             <div class="reaction-wrapper">
@@ -21,14 +20,13 @@
                                 <img src="/images/kosom.PNG" class="icon" alt="">
                                 <img src="/images/icon-kakao.PNG" class="save icon" alt="">
                             </div>
-                            <p class="likes">1,012 likes</p>
                             <p class="description">
                                 <label for="content" class="form-label">내용</label>
-                                <textarea name="content" class="form-control" rows="10" th:text="${board.content}"></textarea>
+                                <textarea name="content" class="form-control" rows="10" th:text="${question.content}"></textarea>
                             </p>
                             <p class="post-time">
-                            <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
-                            <div th:text="${#temporals.format(board.modifyDate, 'yyyy-MM-dd HH:mm')}"></div>
+                            <div th:text="${#temporals.format(question.createDate, 'yyyy년 M월 d일 HH시')}"></div>
+                            <div th:text="${#temporals.format(question.modifyDate, 'yyyy년 M월 d일 HH시 ')}"></div>
                             </p>
 
                             <div class="comment-wrapper">
@@ -37,14 +35,14 @@
                                         <input class="form-check-input" type="checkbox" name="onOff" id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">댓글막기</label>
                                     </div>
-                                    <div th:if="${board.onOff}">
+                                    <div th:if="${question.onOff}">
                                         <input class="form-check-input" type="checkbox" name="onOff" id="flexSwitchCheckChecked" checked>
                                         <label class="form-check-label" for="flexSwitchCheckChecked">댓글막기</label>
                                     </div>
                                 </div>
 
                                 <input type="submit" value="저장하기" class="comment-btn">
-                                <a th:href="@{|/board/post/detail/${question.id}|}" class="comment-btn">취소</a>
+                                <a th:href="@{|/question/list|}" class="comment-btn">취소</a>
                             </div>
                         </div>
                     </form>

@@ -1,5 +1,5 @@
 <html layout:decorate="~{/user/layout}" class="BodyWhite">
-<div layout:fragment="content" class="container my-3 BodyWhite" >
+<div layout:fragment="content" class="container my-3 BodyWhite">
     <!-- 질문 -->
 
     <div class="card my-3">
@@ -9,31 +9,36 @@
         </div>
     </div>
     <div class="detailBorder"></div>
+    <!--댓글-->
+    <div th:if="!${question.onOff}">
 
-    <div id="test" class="card my-3" th:each="answer : ${question.answerList}">
-        <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
-            <div>
-                <div class="InstarDisplayInline" th:text="${#temporals.format(answer.createDate, 'M월 d일')}"></div>
-                <form class="InstarDisplayInline" th:action="@{|/answer/like/${question.id}/${answer.id}|}"
-                      method="post">
-                    <button th:classappend="${answer.replyLike}? 'text-white like': 'text-white unlike' "
-                            class="border-0"
-                            th:text="_." type="submit"></button>
-                </form>
+        <!--댓글표시-->
+        <div id="test" class="card my-3" th:each="answer : ${question.answerList}">
+            <div class="card-body">
+                <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
+                <div>
+                    <div class="InstarDisplayInline" th:text="${#temporals.format(answer.createDate, 'M월 d일')}"></div>
+                    <form class="InstarDisplayInline" th:action="@{|/answer/like/${question.id}/${answer.id}|}"
+                          method="post">
+                        <button th:classappend="${answer.replyLike}? 'text-white like': 'text-white unlike' "
+                                class="border-0"
+                                th:text="_." type="submit"></button>
+                    </form>
+                </div>
             </div>
         </div>
+        <!-- 답변 반복 끝  -->
+        <!-- 답변 작성 -->
+        <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
+            <div th:replace="user/form_errors :: formErrorsFragment"></div>
+            <textarea th:field="*{content}" rows="0.1" class="form-control"></textarea>
+            <button type="submit" class="btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2"
+                     viewBox="0 0 16 16">
+                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </button>
+        </form>
     </div>
-    <!-- 답변 반복 끝  -->
-    <!-- 답변 작성 -->
-    <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="post" class="my-3">
-        <div th:replace="user/form_errors :: formErrorsFragment"></div>
-        <textarea th:field="*{content}" rows="0.1" class="form-control"></textarea>
-        <button type="submit" class="btn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
-                <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-            </svg>
-        </button>
-    </form>
 </div>
 </html>
