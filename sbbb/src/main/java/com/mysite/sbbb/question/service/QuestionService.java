@@ -4,17 +4,11 @@ import com.mysite.sbbb.DataNotFoundException;
 import com.mysite.sbbb.question.dao.QuestionRepository;
 import com.mysite.sbbb.question.domain.Question;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuestionService {
@@ -25,12 +19,14 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
-    public Page<Question> getList(Question question, int page) {
+/*
+    public Page<Question> getList(int page) {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 5, Sort.by(sorts));
         return this.questionRepository.findAll(pageable);
     }
+*/
 
     public Question getQuestion(Integer id) {
         Optional<Question> question = this.questionRepository.findById(id);
@@ -41,6 +37,17 @@ public class QuestionService {
         }
     }
 
+    public Question create(String content){
+        Question question = new Question();
+        question.setContent(content);
+        question.setCreateDate(LocalDateTime.now());
+        question.setModifyDate(LocalDateTime.now());
+        question.setReplyLike(false);
+        this.questionRepository.save(question);
+        return question;
+    }
+ /*
+  // 이미지 다중 이미지 구현 2
     public void create(Question question, List<MultipartFile> files) throws Exception {
         String fileName = null;
         File saveFile;
@@ -57,9 +64,9 @@ public class QuestionService {
             for (MultipartFile file : files) {
                 String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
 
-           /*     UUID uuid = UUID.randomUUID();
+               UUID uuid = UUID.randomUUID();
 
-                fileName = uuid + "_" + file.getOriginalFilename();*/
+                fileName = uuid + "_" + file.getOriginalFilename();*//*
 
                 saveFile = new File(projectPath, fileName);
 
@@ -85,6 +92,8 @@ public class QuestionService {
             throw new RuntimeException(e);
         }
     }
+*/
+
 
 /*
     public void updateHit(Integer id) {

@@ -41,10 +41,12 @@
                             </button>
                         </div>
                         <!--  사진 및 동영상 -->
-                        <img th:if="${question.arr.contains('jpg')}" class="ratio ratio-1x1"
-                             th:src="${question.arr}">
-                        <video th:unless="${question.arr.contains('jpg')}" class="ratio ratio-1x1" controls
-                               th:src="${question.arr}"></video>
+                        <div th:each="image : ${question.fileList}">
+                            <img th:if="${image.filename.contains('jpg')}" class="ratio ratio-1x1"
+                                 th:src="'/uploadFiles/'+${image.filename}" alt="img">
+                            <video th:unless="${image.filename.contains('jpg')}" class="ratio ratio-1x1" controls
+                                   th:src="'/uploadFiles/'+${image.filename}"></video>
+                        </div>
                         <!--좋아요, 댓글-->
                         <div class="post-content">
                             <div class="reaction-wrapper">
