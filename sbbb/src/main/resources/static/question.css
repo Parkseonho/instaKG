@@ -135,3 +135,23 @@ a {
 .center{
     text-align: center;
 }
+
+.like{
+background :url("./icon/like.png") no-repeat;
+border : none;
+cursor : pointer;
+}
+
+.unlike{
+background :url("./icon/unlike.png") no-repeat;
+border : none;
+cursor : pointer;
+
+}
+
+.InstaDisplayInline{
+display : inline;
+float:right;
+padding-right:10px;
+padding-top: 5px;
+}

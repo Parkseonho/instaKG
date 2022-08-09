@@ -40,4 +40,10 @@ public class AnswerController {
         return String.format("redirect:/question/detail/%s", questionId);
     }
 
+    @PostMapping("/main/like/{questionId}/{answerId}")
+    public String createAnswers(@PathVariable("questionId") Integer questionId, @PathVariable("answerId") Integer answerId) {
+        this.answerService.setLike(answerId);
+        return "redirect:/question/list";
+    }
+
 }

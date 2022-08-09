@@ -12,7 +12,12 @@
                         </div>
                     </div>
                     <form th:action="@{|/setting/modify/${question.id}|}" method="post">
-                        <img src="/images/kosom.PNG" class="post-image" alt="">
+                        <div th:each="image : ${question.fileList}">
+                            <img th:if="${image.filename.contains('jpg')}" class="ratio ratio-1x1"
+                                 th:src="'/uploadFiles/'+${image.filename}" alt="img">
+                            <video th:unless="${image.filename.contains('jpg')}" class="ratio ratio-1x1" controls
+                                   th:src="'/uploadFiles/'+${image.filename}"></video>
+                        </div>
                         <div class="post-content">
                             <div class="reaction-wrapper">
                                 <img src="/images/kosom.PNG" class="icon" alt="">
@@ -22,7 +27,8 @@
                             </div>
                             <p class="description">
                                 <label for="content" class="form-label">내용</label>
-                                <textarea name="content" class="form-control" rows="10" th:text="${question.content}"></textarea>
+                                <textarea name="content" class="form-control" rows="10"
+                                          th:text="${question.content}"></textarea>
                             </p>
                             <p class="post-time">
                             <div th:text="${#temporals.format(question.createDate, 'yyyy년 M월 d일 HH시')}"></div>
@@ -32,11 +38,13 @@
                             <div class="comment-wrapper">
                                 <div class="form-check form-switch">
                                     <div th:if="!${question.onOff}">
-                                        <input class="form-check-input" type="checkbox" name="onOff" id="flexSwitchCheckDefault">
+                                        <input class="form-check-input" type="checkbox" name="onOff"
+                                               id="flexSwitchCheckDefault">
                                         <label class="form-check-label" for="flexSwitchCheckDefault">댓글막기</label>
                                     </div>
                                     <div th:if="${question.onOff}">
-                                        <input class="form-check-input" type="checkbox" name="onOff" id="flexSwitchCheckChecked" checked>
+                                        <input class="form-check-input" type="checkbox" name="onOff"
+                                               id="flexSwitchCheckChecked" checked>
                                         <label class="form-check-label" for="flexSwitchCheckChecked">댓글막기</label>
                                     </div>
                                 </div>

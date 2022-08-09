@@ -52,13 +52,13 @@
                             <div class="reaction-wrapper">
                                 <form class="icon" th:action="@{|/question/like/${question.id}|}"
                                       method="post">
-                                    <button th:classappend="${question.replyLike}? 'like': 'unlike' "
+                                    <button th:classappend="${question.replyLike}? 'mt-1 text-white like': 'mt-1 text-white unlike' "
                                             class="border-0"
-                                            th:text="좋아요" type="submit"></button>
+                                            th:text="___" type="submit"></button>
                                 </form>
                                 <a th:href="@{|/question/detail/${question.id}|}"><img
                                         class="icon"
-                                        src="https://cdn.discordapp.com/attachments/984093073330016308/1004596412241166346/unknown.png"></a>
+                                        src="/icon/answer.png" height="10" width="20"></a>
                                 <img src="/images/icon-kakao.PNG" class="save icon" alt="">
                             </div>
                             <!--내용, 답변, 일자-->
@@ -77,11 +77,20 @@
                                     </div>
 
                                     <!--답변 한개 표시-->
+
                                     <div th:each="answer, index : ${question.answerList}">
-                                        <div th:if="${index.index} == 0">
-                                            <div style="white-space: pre-line;"
-                                                 th:text="${answer.content}"></div>
-                                        </div>
+                                        <spanp th:if="${index.index} == 0">
+                                            <spanp th:text="${answer.content}"></spanp>
+                                            <span>
+                                            <form class="InstaDisplayInline" th:action="@{|/answer/main/like/${question.id}/${answer.id}|}"
+                                                  method="post">
+                                                <button th:classappend="${answer.replyLike}? 'text-white like': 'text-white unlike' "
+                                                        class="border-0"
+                                                        th:text="___" type="submit"></button>
+                                            </form>
+                                                </span>
+                                        </spanp>
+
                                     </div>
                                 </div>
                             </div>
