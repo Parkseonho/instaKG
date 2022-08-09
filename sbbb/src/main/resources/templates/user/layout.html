@@ -10,7 +10,9 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/navbar.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/question.css}">
-
+    <link rel="stylesheet" type="text/css" th:href="@{/swiper.css}">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <title>instarKG</title>
 </head>
 <body>
@@ -21,6 +23,7 @@
 <!-- 기본 템플릿 안에 삽입될 내용 End -->
 <!-- Bootstrap JS-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script th:src="@{/bootstrap.min.js}"></script>
 <!-- 자바스크립트 Start -->
 <th:block layout:fragment="script"></th:block>

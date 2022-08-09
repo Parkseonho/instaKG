@@ -41,12 +41,20 @@
                             </button>
                         </div>
                         <!--  사진 및 동영상 -->
-                        <div th:each="image : ${question.fileList}">
-                            <img th:if="${image.filename.contains('jpg')}" class="ratio ratio-1x1"
-                                 th:src="'/uploadFiles/'+${image.filename}" alt="img">
-                            <video th:unless="${image.filename.contains('jpg')}" class="ratio ratio-1x1" controls
-                                   th:src="'/uploadFiles/'+${image.filename}"></video>
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" th:each="image : ${question.fileList}">
+                                    <img th:if="${image.filename.contains('jpg')}" class="ratio ratio-1x1"
+                                         th:src="'/uploadFiles/'+${image.filename}" alt="img">
+                                    <video th:unless="${image.filename.contains('jpg')}" class="ratio ratio-1x1" controls
+                                           th:src="'/uploadFiles/'+${image.filename}"></video>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
                         </div>
+
                         <!--좋아요, 댓글-->
                         <div class="post-content">
                             <div class="reaction-wrapper">
@@ -56,7 +64,7 @@
                                             class="border-0"
                                             th:text="___" type="submit"></button>
                                 </form>
-                                <a th:href="@{|/question/detail/${question.id}|}"><img
+                                <a th:href="@{|/question/list/detail/${question.id}|}"><img
                                         class="icon"
                                         src="/icon/answer.png" height="10" width="20"></a>
                                 <img src="/images/icon-kakao.PNG" class="save icon" alt="">
@@ -231,6 +239,20 @@
 </div>
 
 <script layout:fragment="script" type='text/javascript'>
+//스와이프
+var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+
 function url(){
     var obShareUrl = document.getElementById("ShareUrl");
 	obShareUrl.value = window.document.location.href + "/detail/" + sessionStorage.getItem("question.id") ;
@@ -279,17 +301,17 @@ function shareTwitter(){
     Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
-        title: sessionStorage.getItem("board_title"),
-        description: sessionStorage.getItem("board_content"),
+        title: '',
+        description: sessionStorage.getItem("question_content"),
         imageUrl:
-          'https://kgo.googleusercontent.com/profile_vrt_raw_bytes_1587514212_1078.jpg',
+          'https://cdn.discordapp.com/attachments/993375184193077272/1004543162099966042/MainLogo.png',
         link: {
           mobileWebUrl: sendUrl,
           webUrl: sendUrl,
         },
       },
       social: {
-        likeCount: 286,
+        likeCount: 28000000006,
         commentCount: 45,
         sharedCount: 845,
       },
