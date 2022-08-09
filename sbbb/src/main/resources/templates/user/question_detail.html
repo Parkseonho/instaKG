@@ -17,8 +17,8 @@
             <div class="card-body">
                 <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
                 <div>
-                    <div class="InstarDisplayInline" th:text="${#temporals.format(answer.createDate, 'M월 d일')}"></div>
-                    <form class="InstarDisplayInline" th:action="@{|/answer/like/${question.id}/${answer.id}|}"
+                    <div class="InstaDisplayInline" th:text="${#temporals.format(answer.createDate, 'M월 d일')}"></div>
+                    <form class="InstaDisplayInline" th:action="@{|/answer/like/${question.id}/${answer.id}|}"
                           method="post">
                         <button th:classappend="${answer.replyLike}? 'text-white like': 'text-white unlike' "
                                 class="border-0"

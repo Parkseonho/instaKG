@@ -1,11 +1,13 @@
 package com.mysite.sbbb.question.service;
 
 import com.mysite.sbbb.DataNotFoundException;
+import com.mysite.sbbb.files.domain.Files;
 import com.mysite.sbbb.question.dao.QuestionRepository;
 import com.mysite.sbbb.question.domain.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -116,6 +118,10 @@ public class QuestionService {
     }
 
     public void delete(Question question){
+        String root = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\uploadFiles";
+        for(Files file: question.getFileList()){
+            new File(root + "\\" + file.getFilename()).delete();
+        }
         this.questionRepository.delete(question);
     }
 

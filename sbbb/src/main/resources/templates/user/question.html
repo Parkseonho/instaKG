@@ -78,7 +78,7 @@
                                 <div>
                                     <div>
                                           <span th:if="${#lists.size(question.answerList)}!=0">
-                                           <a th:href="@{|/question/detail/${question.id}|}"
+                                           <a th:href="@{|/question/list/detail/${question.id}|}"
                                               th:text="|${#lists.size(question.answerList)}개의 답변 모두 보기|"></a>
                                          </span>
                                         <span th:if="${#lists.size(question.answerList)}==0"></span>

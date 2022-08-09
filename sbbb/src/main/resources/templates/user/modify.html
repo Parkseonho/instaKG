@@ -12,11 +12,18 @@
                         </div>
                     </div>
                     <form th:action="@{|/setting/modify/${question.id}|}" method="post">
-                        <div th:each="image : ${question.fileList}">
-                            <img th:if="${image.filename.contains('jpg')}" class="ratio ratio-1x1"
-                                 th:src="'/uploadFiles/'+${image.filename}" alt="img">
-                            <video th:unless="${image.filename.contains('jpg')}" class="ratio ratio-1x1" controls
-                                   th:src="'/uploadFiles/'+${image.filename}"></video>
+                        <div class="swiper mySwiper">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide" th:each="image : ${question.fileList}">
+                                    <img th:if="${image.filename.contains('jpg')}" class="ratio ratio-1x1"
+                                         th:src="'/uploadFiles/'+${image.filename}" alt="img">
+                                    <video th:unless="${image.filename.contains('jpg')}" class="ratio ratio-1x1" controls
+                                           th:src="'/uploadFiles/'+${image.filename}"></video>
+                                </div>
+                            </div>
+                            <div class="swiper-button-next"></div>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
                         </div>
                         <div class="post-content">
                             <div class="reaction-wrapper">
@@ -59,4 +66,19 @@
         </div>
     </section>
 </div>
+<script layout:fragment="script" type='text/javascript'>
+//스와이프
+var swiper = new Swiper(".mySwiper", {
+spaceBetween: 30,
+centeredSlides: true,
+pagination: {
+el: ".swiper-pagination",
+clickable: true,
+},
+navigation: {
+nextEl: ".swiper-button-next",
+prevEl: ".swiper-button-prev",
+},
+});
+</script>
 </html>
