@@ -1,7 +1,7 @@
 <html layout:decorate="~{/user/layout}" class="BodyWhite">
-<div layout:fragment="content" class="container my-3 BodyWhite">
-    <!-- 질문 -->
-
+<!-- 질문 -->
+<div layout:fragment="content" class = "container my-3">
+<section>
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;" th:text="${question.content}"></div>
@@ -15,7 +15,15 @@
         <!--댓글표시-->
         <div id="test" class="card my-3" th:each="answer : ${question.answerList}">
             <div class="card-body">
-                <div class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></div>
+                <div>
+                    <span class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></span>
+                    <button type="button" class="btn form-inline ml-5" id="myModal" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal" th:data-id="${question.id}"
+                            th:data-content="${question.content}">
+                        <img src="https://img.icons8.com/stickers/344/ellipsis.png" width="20" height="20"
+                             alt="">
+                    </button>
+                </div>
                 <div>
                     <div class="InstaDisplayInline" th:text="${#temporals.format(answer.createDate, 'M월 d일')}"></div>
                     <form class="InstaDisplayInline" th:action="@{|/answer/like/${question.id}/${answer.id}|}"
@@ -24,6 +32,8 @@
                                 class="border-0"
                                 th:text="___" type="submit"></button>
                     </form>
+                    <!--옵션(모달창)-->
+
                 </div>
             </div>
         </div>
@@ -40,5 +50,82 @@
             </button>
         </form>
     </div>
+</section>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-body center">
+
+                    <a href="" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">
+                        <div>
+                            삭제
+                        </div>
+                    </a>
+                    <hr>
+
+
+                    <a href="javascript:move('/setting/modify/');">
+                        <div>
+                            수정
+                        </div>
+                    </a>
+
+                    <hr>
+
+                    <a href="" data-bs-dismiss="modal">
+                        <div>
+                            취소
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal 2 -->
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+         tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    삭제하시겠습니까?
+                </div>
+                <div class="modal-body center">
+                    <a href="javascript:move('/setting/delete/');">
+                        <div>
+                            확인
+                        </div>
+                    </a>
+                    <hr>
+                    <a href="" data-bs-dismiss="modal">
+                        <div>
+                            취소
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
+
+<script layout:fragment="script" type='text/javascript'>
+//modal에 정보전달
+$('#exampleModal').on('show.bs.modal', function (e) {
+    var questionId = $(e.relatedTarget).data('id');
+    var questionContent = $(e.relatedTarget).data('content');
+	sessionStorage.setItem("question_id", questionId);
+	sessionStorage.setItem("question_content", questionContent);
+});
+
+function move(url){
+    location.href = url+sessionStorage.getItem("question_id");
+    sessionStorage.removeItem("question_id");
+}
+//파일이름 쪼개기
+</script>
+<!-- 자바스크립트 -->
 </html>

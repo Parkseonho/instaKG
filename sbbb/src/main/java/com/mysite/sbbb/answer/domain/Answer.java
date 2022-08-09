@@ -24,6 +24,8 @@ public class Answer {
 
     private LocalDateTime createDate;
 
+    private LocalDateTime modifyDate;
+
     private Boolean replyLike;
 
 
