@@ -45,9 +45,11 @@ object-fit: cover;
 }
 
 img {
-max-height:500px;
+max-height:650px;
+max-width:500px;
 }
 
 video {
-max-height:500px;
+max-height:650px;
+max-width:500px;
 }
