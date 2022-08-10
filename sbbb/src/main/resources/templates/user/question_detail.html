@@ -15,15 +15,17 @@
         <!--댓글표시-->
         <div id="test" class="card my-3" th:each="answer : ${question.answerList}">
             <div class="card-body">
-                <div>
+
+                <div class="d-flex justify-content-between">
                     <span class="card-text" style="white-space: pre-line;" th:text="${answer.content}"></span>
-                    <button type="button" class="btn form-inline ml-5" id="myModal" data-bs-toggle="modal"
+                    <button type="button" class="btn form-inline pt-0 pb-10" id="myModal" data-bs-toggle="modal"
                             data-bs-target="#exampleModal" th:data-id="${answer.id}"
                             th:data-content="${question.content}">
                         <img src="https://img.icons8.com/stickers/344/ellipsis.png" width="20" height="20"
                              alt="">
                     </button>
                 </div>
+
                 <div>
                     <div class="InstaDisplayInline" th:text="${#temporals.format(answer.createDate, 'M월 d일')}"></div>
                     <form class="InstaDisplayInline" th:action="@{|/answer/like/${question.id}/${answer.id}|}"
