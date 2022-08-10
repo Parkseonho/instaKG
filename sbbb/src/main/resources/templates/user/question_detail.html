@@ -65,7 +65,7 @@
                     <hr>
 
 
-                    <a href="javascript:move('/setting/modify/');">
+                    <a href="javascript:move('/comment/modify/');">
                         <div>
                             수정
                         </div>
@@ -92,7 +92,7 @@
                     삭제하시겠습니까?
                 </div>
                 <div class="modal-body center">
-                    <a href="javascript:move('/setting/delete/');">
+                    <a href="javascript:move('/comment/delete/');">
                         <div>
                             확인
                         </div>
@@ -115,15 +115,15 @@
 <script layout:fragment="script" type='text/javascript'>
 //modal에 정보전달
 $('#exampleModal').on('show.bs.modal', function (e) {
-    var questionId = $(e.relatedTarget).data('id');
-    var questionContent = $(e.relatedTarget).data('content');
-	sessionStorage.setItem("question_id", questionId);
-	sessionStorage.setItem("question_content", questionContent);
+    var answerId = $(e.relatedTarget).data('id');
+    var answerContent = $(e.relatedTarget).data('content');
+	sessionStorage.setItem("answer_id", answerId);
+	sessionStorage.setItem("answer_content", answerContent);
 });
 
 function move(url){
-    location.href = url+sessionStorage.getItem("question_id");
-    sessionStorage.removeItem("question_id");
+    location.href = url+sessionStorage.getItem("answer_id");
+    sessionStorage.removeItem("answer_id");
 }
 //파일이름 쪼개기
 </script>

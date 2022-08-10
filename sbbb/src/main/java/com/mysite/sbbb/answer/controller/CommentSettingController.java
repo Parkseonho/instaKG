@@ -30,7 +30,7 @@ public class CommentSettingController {
         Answer answer = this.answerService.getComment(id);
         answerForm.setContent(answerForm.getContent());
         model.addAttribute("answer", answer);
-        return "user/modify/comment";
+        return "user/CommentModify";
     }
 
     @PostMapping("/modify/{id}")
@@ -38,7 +38,7 @@ public class CommentSettingController {
         Answer answer = this.answerService.getComment(id);
         if (bindingResult.hasErrors()) {
             model.addAttribute("answer", answer);
-            return "user/modify/comment";
+            return "user/CommentModify";
         }
         this.answerService.modify(answer, answerForm.getContent(), onOff);
         return "redirect:/question/list/";
