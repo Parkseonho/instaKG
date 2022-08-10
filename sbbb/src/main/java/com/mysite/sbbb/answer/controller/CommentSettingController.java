@@ -22,7 +22,7 @@ public class CommentSettingController {
     public String delete(@PathVariable("id") Integer id){
         Answer answer = this.answerService.getComment(id);
         this.answerService.delete(answer);
-        return "redirect:/question/list";
+        return String.format("redirect:/question/list/detail/%s",answer.getQuestion().getId());
     }
 
     @GetMapping("/modify/{id}")
@@ -41,7 +41,7 @@ public class CommentSettingController {
             return "user/CommentModify";
         }
         this.answerService.modify(answer, answerForm.getContent(), onOff);
-        return "redirect:/question/list/";
+        return String.format("redirect:/question/list/detail/%s",answer.getQuestion().getId());
     }
 
 

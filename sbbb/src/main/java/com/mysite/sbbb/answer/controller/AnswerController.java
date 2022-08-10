@@ -30,7 +30,7 @@ public class AnswerController {
             return "user/question_detail";
         }
         this.answerService.create(question, answerForm.getContent());
-        return String.format("redirect:/question/detail/%s", id);
+        return String.format("redirect:/question/list/detail/%s", id);
     }
 
     @PostMapping("/like/{questionId}/{answerId}")
